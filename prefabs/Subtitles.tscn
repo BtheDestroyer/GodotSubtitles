@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/subtitles/Subtitles.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.501961 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Closed"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Closed"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachine" id=8]
+states/Closed/node = SubResource( 4 )
+states/Closed/position = Vector2( 394, 117 )
+states/Open/node = SubResource( 5 )
+states/Open/position = Vector2( 604, 117 )
+transitions = [ "Closed", "Open", SubResource( 6 ), "Open", "Closed", SubResource( 7 ) ]
+start_node = "Closed"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[node name="Subtitles" type="RichTextLabel"]
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+bbcode_enabled = true
+bbcode_text = "[center]This is a test for subtitles.[/center]"
+text = "This is a test for subtitles."
+fit_content_height = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -16.0
+margin_right = 48.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Closed = SubResource( 2 )
+anims/Open = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 9 )

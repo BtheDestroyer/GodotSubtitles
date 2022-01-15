@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/subtitles/prefabs/Subtitles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/subtitles/SubtitleInterface.gd" type="Script" id=2]
+[ext_resource path="res://addons/subtitles/examples/Button_PlayAnimation.gd" type="Script" id=3]
+[ext_resource path="res://addons/subtitles/examples/Test.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Play"
+length = 1.6
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("SubtitleInterface")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.7, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ "Hello.", 3.0 ],
+"method": "add_line"
+}, {
+"args": [ "This is a test.", 3.0 ],
+"method": "add_line"
+}, {
+"args": [  ],
+"method": "clear_lines"
+} ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Subtitles" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Audio"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
+anims/Play = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Button"]
+stream = ExtResource( 4 )
+
+[node name="SubtitleInterface" type="Node" parent="Button"]
+script = ExtResource( 2 )
+
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
