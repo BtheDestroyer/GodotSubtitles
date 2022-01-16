@@ -13,3 +13,9 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Plugin development ignores
+default_env.tres
+icon.png
+icon.png.import
+project.godot
