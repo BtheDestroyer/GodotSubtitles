@@ -2,7 +2,7 @@
 
 Display subtitles and captions to increase the accessibility of your game.
 
-![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=Subtitles)
+[![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=Subtitles)](#privacy-notice)
 
 ## Privacy Notice
 
