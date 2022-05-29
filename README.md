@@ -2,7 +2,7 @@
 
 Display subtitles and captions to increase the accessibility of your game.
 
-[![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=Subtitles)](#privacy-notice)
+[![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=Subtitles)](#privacy-notice) [![Other addons](https://img.shields.io/badge/-See%20my%20other%20Godot%20addons-informational)](https://godotengine.org/asset-library/asset?user=BryceDixon)
 
 ## Privacy Notice
 
